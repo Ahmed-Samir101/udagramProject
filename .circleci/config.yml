@@ -13,7 +13,8 @@ jobs:
     steps:
       # install node and checkout code
       - node/install:
-          node-version: '14.15.0'         
+          node-version: '14.15.0'
+      - aws-cli/setup         
       - checkout
       # Use root level package.json to install dependencies in the frontend app
       - run:
@@ -32,26 +33,18 @@ jobs:
           name: API Build
           command: |
             npm run api:build
+      - eb/setup
       - run:
           name: Install pip
           command: |
             sudo apt update
             sudo apt install -y python3-pip python-dev
-      - run:
-          name: Install AWS dependencies
-          command: |
-            sudo pip install awsebcli
-            sudo pip install awscli
-  deploy:
-    docker:
-      - image: "cimg/base:stable"
+      # - run:
+      #     name: Install AWS dependencies
+      #     command: |
+      #       sudo pip install awsebcli
+      #       sudo pip install awscli
       # more setup needed for aws, node, elastic beanstalk
-    steps:
-      - node/install:
-          node-version: '14.15.0' 
-      - eb/setup
-      - aws-cli/setup
-      - checkout
       - run:
           name: Deploy udagram-api
           command: |
@@ -65,14 +58,9 @@ workflows:
   udagram:
     jobs:
       - build
-      - hold:
-          filters:
+         - filters:
             branches:
               only:
                 - main
-          type: approval
           requires:
             - build
-      - deploy:
-          requires:
-            - hold

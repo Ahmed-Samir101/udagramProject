@@ -1,10 +1,10 @@
 # Hosting a Full-Stack Application
-This a full-stack application to perform deployment using RDS, S3 an ElsticBeanstalk. Screenshots of each service working is in screenshots file.
-It also have CI/CD pipeline successfully running with screenshot provided.
-link to application: http://udagrambucket1.s3-website-us-east-1.amazonaws.com
+This full-stack application uses AWS services such as RDS, S3 an ElsticBeanstalk, and it has a functioning pipeline.
+Screenshots has been added in the screenshots folder. 
+Application link: http://mybucket8102.s3-website-us-east-1.amazonaws.com
 
 # Udagram
-The udagram application is a fairly simple application that includes all the major components of a Full-Stack web application.
+A simple applecation that can rejester/login users and add new posts
 
 ### Dependencies
 
